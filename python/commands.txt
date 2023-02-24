@@ -1,0 +1,3 @@
+cd ../iccn-logos/
+cp *.* /usr/local/opnsense/www/themes/tukan/build/images/
+
