@@ -5,9 +5,18 @@
 cd ../iccn-logos/
 if [ -d /root/iccn-rebranding/iccn-logos ]
 then
-	cp *.* /usr/local/opnsense/www/themes/tukan/build/images/
-	echo "Logos have been changed! Please refresh you Web GUI and/or clear your browser cache to see the results."
-else
-	echo "No changes in logos have taken place. Please try again!!!"
-fi
+    out1=$(pkg info os-theme-tukan | grep Name)
+    compare_string="Name           : os-theme-tukan-1.26"
 
+    if [ "$out1" == "$compare_string" ]
+    then
+        echo "Package: os-theme-tukan-1.26 already installed."
+	cp *.* /usr/local/opnsense/www/themes/tukan/build/images/
+    else
+        echo "os-theme-tukan-1.26 is not installed. Installing os-theme-tukan-1.26 ..."
+        pkg install -y os-theme-tukan-1.26
+	cp *.* /usr/local/opnsense/www/themes/tukan/build/images/
+    fi
+else
+    echo "No changes in logos have taken place. Please try again!!!"
+fi
